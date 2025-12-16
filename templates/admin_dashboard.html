@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}لوحة المشرف - منصة تيك توك{% endblock %}
+{% block title %}لوحة المشرف - إعلانات عبدول{% endblock %}
 
 {% block content %}
 <div class="container py-5">
-    <h2 class="fw-bold mb-4 text-danger"><i class="fa-solid fa-user-shield"></i> لوحة تحكم المشرف</h2>
+    <h2 class="fw-bold mb-4 text-primary"><i class="fa-solid fa-user-shield"></i> لوحة تحكم المشرف</h2>
 
     <div class="card bg-dark border-secondary mb-4">
         <div class="card-header border-secondary">
@@ -55,5 +55,28 @@
             </div>
         </div>
     </div>
+
+    <!-- Integrations Section -->
+    <div class="card bg-dark border-secondary mt-5">
+        <div class="card-header border-secondary d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fa-solid fa-plug"></i> التكاملات (Integrations)</h5>
+            <span class="badge bg-success">Active</span>
+        </div>
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-1 text-center fs-1 text-white">
+                    <i class="fa-brands fa-tiktok"></i>
+                </div>
+                <div class="col-md-8">
+                    <h5 class="card-title">TikTok Ads API</h5>
+                    <p class="card-text text-muted">ربط مباشر مع حساب تيك توك الإعلاني لنشر الحملات تلقائياً.</p>
+                </div>
+                <div class="col-md-3 text-end">
+                    <button class="btn btn-outline-primary w-100">إدارة الربط</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}

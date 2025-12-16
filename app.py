@@ -186,11 +186,16 @@ def admin_action(ad_id, action):
         ad.status = 'rejected'
         flash('تم رفض الإعلان.', 'warning')
     elif action == 'publish':
-        # Simulate TikTok API Call
+        # TODO: Integrate with TikTok Marketing API
+        # This is where the actual API call would happen.
+        # For now, we simulate a successful response from "Tiko" (TikTok).
+        
+        # api_response = tiktok_api.publish(ad.filename, ad.title)
+        
         ad.status = 'published'
-        ad.tiktok_url = f"https://www.tiktok.com/@ads_market/video/{datetime.now().strftime('%f')}"
-        ad.views = 150
-        flash('تم نشر الإعلان على تيك توك بنجاح!', 'success')
+        ad.tiktok_url = f"https://www.tiktok.com/@abdool_ads/video/{datetime.now().strftime('%f')}"
+        ad.views = 0 # Start with 0 views
+        flash('تم النشر بنجاح عبر TikTok API (محاكاة)', 'success')
         
     db.session.commit()
     return redirect(url_for('admin_dashboard'))
