@@ -53,7 +53,17 @@ class VPSManager:
         for folder in ['templates', 'static']:
             self.run_command(f"mkdir -p {remote_path}/{folder}")
             for item in os.listdir(f"{local_path}\\{folder}"):
-                sftp.put(f"{local_path}\\{folder}\\{item}", f"{remote_path}/{folder}/{item}")
+                # Skip uploads folder in static to avoid overwriting user data if we were syncing down, 
+                # but here we just want to ensure the folder exists
+                if folder == 'static' and item == 'uploads':
+                    continue
+                if os.path.isfile(f"{local_path}\\{folder}\\{item}"):
+                    sftp.put(f"{local_path}\\{folder}\\{item}", f"{remote_path}/{folder}/{item}")
+        
+        # Ensure uploads directory exists and has permissions
+        self.run_command(f"mkdir -p {remote_path}/static/uploads")
+        self.run_command(f"chmod 777 {remote_path}/static/uploads") # Allow uploads
+        
         sftp.close()
 
         # 4. Install Python Requirements

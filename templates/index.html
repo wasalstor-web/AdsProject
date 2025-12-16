@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع إعلانات</title>
+    <title>سوق الإعلانات المفتوح</title>
+    <!-- Bootstrap 5 CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <header>
-        <h1>سوق الإعلانات المفتوح</h1>
-        <nav>
-            <a href="{{ url_for('index') }}">الرئيسية</a>
-            <a href="{{ url_for('add_ad') }}" class="btn">أضف إعلانك</a>
-        </nav>
-    </header>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">🛒 سوق الإعلانات</a>
+            <div class="d-flex">
+                <a href="{{ url_for('add_ad') }}" class="btn btn-light fw-bold">➕ أضف إعلانك</a>
+            </div>
+        </div>
+    </nav>
 
-    <main>
-        <h2>آخر الإعلانات</h2>
-        <div class="ads-container">
+    <main class="container">
+        <h2 class="mb-4 text-center text-secondary">أحدث الإعلانات</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for ad in ads %}
-            <div class="ad-card">
-                <h3>{{ ad.title }}</h3>
-                <p class="price">{{ ad.price }} ريال</p>
-                <p class="desc">{{ ad.description }}</p>
-                <p class="contact">للتواصل: {{ ad.contact }}</p>
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    {% if ad.image_filename %}
+                    <img src="{{ url_for('static', filename='uploads/' + ad.image_filename) }}" class="card-img-top" alt="{{ ad.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <span>لا توجد صورة</span>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">{{ ad.title }}</h5>
+                        <h6 class="card-subtitle mb-2 text-success fw-bold">{{ ad.price }} ريال</h6>
+                        <p class="card-text text-muted">{{ ad.description }}</p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <a href="tel:{{ ad.contact }}" class="btn btn-outline-primary w-100">📞 تواصل: {{ ad.contact }}</a>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </main>
+
+    <footer class="text-center py-4 text-muted mt-5">
+        <small>&copy; 2025 سوق الإعلانات المفتوح</small>
+    </footer>
 </body>
 </html>
