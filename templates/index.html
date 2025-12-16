@@ -1,48 +1,111 @@
 {% extends 'base.html' %}
 
-{% block title %}الرئيسية - منصة تيك توك{% endblock %}
+{% block title %}الرئيسية - منصة تيك توك الإعلانية{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <!-- Hero Section -->
-    <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold mb-3">اكتشف أحدث الفيديوهات</h1>
-        <p class="lead text-white-50">منصة مشاركة الفيديوهات القصيرة الأفضل</p>
+<!-- Hero Section -->
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-dark rounded-5 shadow-lg" style="background: linear-gradient(45deg, #000000, #1a1a1a);">
+    <div class="col-md-8 p-lg-5 mx-auto my-5">
+        <h1 class="display-3 fw-bold mb-3">انشر إعلانك على <span class="text-danger">TikTok</span> بضغطة زر</h1>
+        <p class="lead fw-normal text-white-50 mb-4">منصة متكاملة لإدارة حملاتك الإعلانية. ارفع إعلانك، اختر باقتك، ودعنا نتولى النشر والتحليل.</p>
+        <div class="d-flex gap-3 justify-content-center lead fw-normal">
+            <a class="btn btn-danger btn-lg rounded-pill px-4 fw-bold" href="{{ url_for('register') }}">
+                <i class="fa-solid fa-rocket me-2"></i> ابدأ الآن
+            </a>
+            <a class="btn btn-outline-light btn-lg rounded-pill px-4" href="#features">
+                تعرف علينا
+            </a>
+        </div>
     </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+</div>
 
-    <!-- Video Grid -->
-    <div class="row g-4">
-        {% for video in videos %}
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <div class="card bg-dark border-secondary h-100 shadow-lg video-card">
-                <div class="ratio ratio-9x16 bg-black rounded-top overflow-hidden">
-                    <video controls class="w-100 h-100 object-fit-cover" preload="metadata">
-                        <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
-                        متصفحك لا يدعم تشغيل الفيديو.
-                    </video>
+<!-- Features -->
+<div class="container py-5" id="features">
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col">
+            <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3 text-danger">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <h3 class="fs-2 text-white">رفع سهل وسريع</h3>
+            <p class="text-white-50">ارفع فيديوهاتك الإعلانية مباشرة من لوحة التحكم الخاصة بك بكل سهولة.</p>
+        </div>
+        <div class="col">
+            <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3 text-info">
+                <i class="fa-brands fa-tiktok"></i>
+            </div>
+            <h3 class="fs-2 text-white">نشر تلقائي</h3>
+            <p class="text-white-50">بمجرد الموافقة على إعلانك، يتم نشره تلقائياً على حساباتنا في تيك توك.</p>
+        </div>
+        <div class="col">
+            <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3 text-warning">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h3 class="fs-2 text-white">تحليلات دقيقة</h3>
+            <p class="text-white-50">تابع أداء إعلاناتك، المشاهدات، والتفاعل لحظة بلحظة من لوحة تحكمك.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Pricing -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">باقات تناسب الجميع</h2>
+        <p class="text-white-50">اختر الخطة المناسبة لحجم أعمالك</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm bg-dark border-secondary">
+                <div class="card-header py-3 border-secondary">
+                    <h4 class="my-0 fw-normal text-white">الأساسية</h4>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title text-truncate fw-bold">{{ video.title }}</h5>
-                    <p class="card-text text-white-50 small text-truncate">{{ video.description }}</p>
-                    <div class="d-flex justify-content-between align-items-center mt-3">
-                        <small class="text-muted"><i class="fa-regular fa-clock me-1"></i> {{ video.created_at.strftime('%Y-%m-%d') }}</small>
-                        <button class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-solid fa-share"></i></button>
-                    </div>
+                    <h1 class="card-title pricing-card-title text-white">99 <small class="text-muted fw-light">ريال</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-white-50">
+                        <li>نشر إعلان واحد</li>
+                        <li>مراجعة خلال 24 ساعة</li>
+                        <li>تحليلات أساسية</li>
+                        <li>دعم فني عبر البريد</li>
+                    </ul>
+                    <a href="{{ url_for('register') }}" class="w-100 btn btn-lg btn-outline-light rounded-pill">اشترك الآن</a>
                 </div>
             </div>
         </div>
-        {% else %}
-        <div class="col-12 text-center py-5">
-            <div class="py-5">
-                <i class="fa-solid fa-video-slash display-1 text-secondary mb-3"></i>
-                <h3 class="text-white-50">لا توجد فيديوهات حالياً</h3>
-                <p class="text-muted">كن أول من يشارك فيديو!</p>
-                <a href="{{ url_for('upload') }}" class="btn btn-primary rounded-pill px-4 mt-3">
-                    <i class="fa-solid fa-plus me-2"></i> رفع فيديو جديد
-                </a>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary bg-dark">
+                <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">الأولى</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title text-white">399 <small class="text-muted fw-light">ريال</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-white-50">
+                        <li>نشر 5 إعلانات</li>
+                        <li>أولوية في المراجعة</li>
+                        <li>تحليلات متقدمة</li>
+                        <li>دعم فني مباشر</li>
+                    </ul>
+                    <a href="{{ url_for('register') }}" class="w-100 btn btn-lg btn-primary rounded-pill">اشترك الآن</a>
+                </div>
             </div>
         </div>
-        {% endfor %}
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-warning bg-dark">
+                <div class="card-header py-3 text-bg-warning border-warning">
+                    <h4 class="my-0 fw-normal text-dark">المتقدمة</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title text-white">699 <small class="text-muted fw-light">ريال</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-white-50">
+                        <li>نشر 10 إعلانات</li>
+                        <li>نشر فوري (بعد الموافقة)</li>
+                        <li>تقارير أداء شاملة</li>
+                        <li>مدير حساب خاص</li>
+                    </ul>
+                    <a href="{{ url_for('register') }}" class="w-100 btn btn-lg btn-warning rounded-pill">اشترك الآن</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

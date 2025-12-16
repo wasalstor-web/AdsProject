@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}إنشاء إعلان جديد - منصة تيك توك{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card bg-dark border-secondary shadow-lg rounded-4">
+                <div class="card-header bg-transparent border-secondary py-4">
+                    <h3 class="mb-0 fw-bold text-center"><i class="fa-solid fa-bullhorn text-danger me-2"></i> إنشاء حملة إعلانية</h3>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form method="post" enctype="multipart/form-data">
+                        
+                        <!-- Package Selection -->
+                        <h5 class="text-white-50 mb-3">1. اختر الباقة</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="package" id="basic" value="basic" required>
+                                <label class="btn btn-outline-secondary w-100 h-100 p-3 text-start" for="basic">
+                                    <div class="fw-bold text-white">الباقة الأساسية</div>
+                                    <small class="text-muted">نشر إعلان واحد</small>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="package" id="first" value="first">
+                                <label class="btn btn-outline-primary w-100 h-100 p-3 text-start" for="first">
+                                    <div class="fw-bold text-white">الباقة الأولى</div>
+                                    <small class="text-muted">نشر 5 إعلانات</small>
+                                </label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="radio" class="btn-check" name="package" id="advanced" value="advanced">
+                                <label class="btn btn-outline-warning w-100 h-100 p-3 text-start" for="advanced">
+                                    <div class="fw-bold text-white">الباقة المتقدمة</div>
+                                    <small class="text-muted">نشر 10 إعلانات</small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Ad Details -->
+                        <h5 class="text-white-50 mb-3">2. تفاصيل الإعلان</h5>
+                        <div class="mb-3">
+                            <label class="form-label">عنوان الإعلان</label>
+                            <input type="text" name="title" class="form-control bg-black text-white border-secondary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">الوصف والهاشتاقات</label>
+                            <textarea name="description" class="form-control bg-black text-white border-secondary" rows="3"></textarea>
+                        </div>
+
+                        <!-- Video Upload -->
+                        <h5 class="text-white-50 mb-3">3. رفع الفيديو</h5>
+                        <div class="mb-4">
+                            <input type="file" class="form-control bg-black text-white border-secondary" name="video" accept="video/*" required>
+                            <div class="form-text text-muted">MP4, MOV, AVI (Max 100MB)</div>
+                        </div>
+
+                        <!-- Payment (Placeholder) -->
+                        <div class="alert alert-info border-0 bg-opacity-10 bg-info text-info">
+                            <i class="fa-solid fa-credit-card me-2"></i> سيتم تحويلك لصفحة الدفع بعد الضغط على إرسال
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-danger btn-lg rounded-pill fw-bold">
+                                إرسال للمراجعة والدفع <i class="fa-solid fa-arrow-left ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

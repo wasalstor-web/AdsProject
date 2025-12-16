@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}إنشاء حساب جديد - منصة تيك توك{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card bg-dark border-secondary shadow-lg rounded-4">
+                <div class="card-body p-4">
+                    <h3 class="text-center fw-bold mb-4"><i class="fa-solid fa-user-plus text-info"></i> إنشاء حساب</h3>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label class="form-label text-white-50">الاسم الكامل</label>
+                            <input type="text" name="name" class="form-control bg-black text-white border-secondary" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white-50">البريد الإلكتروني</label>
+                            <input type="email" name="email" class="form-control bg-black text-white border-secondary" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label text-white-50">كلمة المرور</label>
+                            <input type="password" name="password" class="form-control bg-black text-white border-secondary" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-info text-dark rounded-pill fw-bold">تسجيل</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('login') }}" class="text-white-50 small">لديك حساب بالفعل؟ سجل دخول</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

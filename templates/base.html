@@ -29,11 +29,20 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ url_for('index') }}"><i class="fa-solid fa-house me-1"></i> الرئيسية</a>
                     </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}"><i class="fa-solid fa-gauge me-1"></i> لوحة التحكم</a>
+                    </li>
+                    {% endif %}
                 </ul>
-                <div class="d-flex">
-                    <a href="{{ url_for('upload') }}" class="btn btn-danger rounded-pill px-4 fw-bold">
-                        <i class="fa-solid fa-plus me-2"></i> رفع فيديو
-                    </a>
+                <div class="d-flex gap-2">
+                    {% if current_user.is_authenticated %}
+                        <span class="navbar-text text-white me-3">مرحباً، {{ current_user.name }}</span>
+                        <a href="{{ url_for('logout') }}" class="btn btn-outline-light rounded-pill px-3">خروج</a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="btn btn-outline-light rounded-pill px-3">دخول</a>
+                        <a href="{{ url_for('register') }}" class="btn btn-danger rounded-pill px-3">تسجيل جديد</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
