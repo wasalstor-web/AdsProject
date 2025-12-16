@@ -1,91 +1,48 @@
 {% extends 'base.html' %}
 
+{% block title %}الرئيسية - منصة تيك توك{% endblock %}
+
 {% block content %}
-<!-- Hero Section -->
-<header class="hero-section text-white text-center py-5 mb-5">
-    <div class="container py-5">
-        <h1 class="display-4 fw-bold mb-3">ما الذي تبحث عنه اليوم؟</h1>
-        <p class="lead mb-4 opacity-75">أكبر سوق مفتوح للبيع والشراء في المملكة</p>
-        
-        <!-- Search Bar -->
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="input-group input-group-lg shadow-lg rounded-pill overflow-hidden bg-white p-1">
-                    <input type="text" class="form-control border-0 rounded-pill" placeholder="ابحث عن سيارة، جوال، شقة...">
-                    <button class="btn btn-primary rounded-pill px-4 ms-1" type="button">بحث</button>
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold mb-3">اكتشف أحدث الفيديوهات</h1>
+        <p class="lead text-white-50">منصة مشاركة الفيديوهات القصيرة الأفضل</p>
+    </div>
+
+    <!-- Video Grid -->
+    <div class="row g-4">
+        {% for video in videos %}
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <div class="card bg-dark border-secondary h-100 shadow-lg video-card">
+                <div class="ratio ratio-9x16 bg-black rounded-top overflow-hidden">
+                    <video controls class="w-100 h-100 object-fit-cover" preload="metadata">
+                        <source src="{{ url_for('static', filename='uploads/' + video.filename) }}" type="video/mp4">
+                        متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
                 </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Categories Section (Optional Visual) -->
-<section class="container mb-5">
-    <div class="row text-center g-4">
-        <div class="col-6 col-md-3">
-            <div class="p-3 border rounded-3 bg-white shadow-sm hover-card">
-                <i class="fa-solid fa-car fs-2 text-primary mb-2"></i>
-                <h6 class="mb-0">سيارات</h6>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="p-3 border rounded-3 bg-white shadow-sm hover-card">
-                <i class="fa-solid fa-house fs-2 text-success mb-2"></i>
-                <h6 class="mb-0">عقارات</h6>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="p-3 border rounded-3 bg-white shadow-sm hover-card">
-                <i class="fa-solid fa-mobile-screen fs-2 text-info mb-2"></i>
-                <h6 class="mb-0">إلكترونيات</h6>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="p-3 border rounded-3 bg-white shadow-sm hover-card">
-                <i class="fa-solid fa-couch fs-2 text-warning mb-2"></i>
-                <h6 class="mb-0">أثاث</h6>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Ads Grid -->
-<section class="container mb-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="fw-bold border-end border-5 border-primary pe-3">أحدث الإعلانات</h3>
-        <a href="#" class="text-decoration-none fw-bold">عرض الكل <i class="fa-solid fa-arrow-left ms-1"></i></a>
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        {% for ad in ads %}
-        <div class="col">
-            <div class="card h-100 shadow-sm border-0 hover-card transition-all">
-                <div class="position-relative">
-                    {% if ad.image_filename %}
-                    <img src="{{ url_for('static', filename='uploads/' + ad.image_filename) }}" class="card-img-top" alt="{{ ad.title }}" style="height: 200px; object-fit: cover;">
-                    {% else %}
-                    <div class="card-img-top bg-light text-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
-                        <i class="fa-regular fa-image fs-1 opacity-25"></i>
-                    </div>
-                    {% endif %}
-                    <span class="badge bg-primary position-absolute top-0 start-0 m-2">جديد</span>
-                </div>
-                
                 <div class="card-body">
-                    <h5 class="card-title fw-bold text-dark text-truncate">{{ ad.title }}</h5>
-                    <p class="card-text text-muted small text-truncate-2">{{ ad.description }}</p>
+                    <h5 class="card-title text-truncate fw-bold">{{ video.title }}</h5>
+                    <p class="card-text text-white-50 small text-truncate">{{ video.description }}</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <span class="text-primary fw-bold fs-5">{{ ad.price }} <small>ريال</small></span>
+                        <small class="text-muted"><i class="fa-regular fa-clock me-1"></i> {{ video.created_at.strftime('%Y-%m-%d') }}</small>
+                        <button class="btn btn-sm btn-outline-light rounded-circle"><i class="fa-solid fa-share"></i></button>
                     </div>
                 </div>
-                <div class="card-footer bg-white border-top-0 pt-0 pb-3">
-                    <a href="tel:{{ ad.contact }}" class="btn btn-outline-success w-100 rounded-pill">
-                        <i class="fa-brands fa-whatsapp me-1"></i> تواصل
-                    </a>
-                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5">
+            <div class="py-5">
+                <i class="fa-solid fa-video-slash display-1 text-secondary mb-3"></i>
+                <h3 class="text-white-50">لا توجد فيديوهات حالياً</h3>
+                <p class="text-muted">كن أول من يشارك فيديو!</p>
+                <a href="{{ url_for('upload') }}" class="btn btn-primary rounded-pill px-4 mt-3">
+                    <i class="fa-solid fa-plus me-2"></i> رفع فيديو جديد
+                </a>
             </div>
         </div>
         {% endfor %}
     </div>
-</section>
+</div>
 {% endblock %}

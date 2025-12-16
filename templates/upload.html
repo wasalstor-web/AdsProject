@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}رفع فيديو جديد - منصة تيك توك{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card bg-dark border-secondary shadow-lg rounded-4">
+                <div class="card-header bg-transparent border-secondary py-4 text-center">
+                    <h3 class="mb-0 fw-bold"><i class="fa-brands fa-tiktok text-danger me-2"></i> رفع فيديو جديد</h3>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form method="post" enctype="multipart/form-data">
+                        
+                        <!-- Video Upload -->
+                        <div class="mb-4 text-center">
+                            <div class="upload-zone p-5 border-2 border-dashed border-secondary rounded-3 bg-black position-relative" id="dropZone">
+                                <input type="file" class="form-control position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer" name="video" id="video" accept="video/*" required onchange="previewVideo(this)">
+                                <div id="uploadPrompt">
+                                    <i class="fa-solid fa-cloud-arrow-up display-4 text-danger mb-3"></i>
+                                    <h5 class="fw-bold">اضغط أو اسحب الفيديو هنا</h5>
+                                    <p class="text-muted small mb-0">MP4, MOV, AVI (Max 100MB)</p>
+                                </div>
+                                <div id="videoPreview" class="d-none">
+                                    <i class="fa-solid fa-file-video display-4 text-success mb-3"></i>
+                                    <h5 class="fw-bold text-success" id="fileName">تم اختيار الملف</h5>
+                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2" onclick="resetUpload()">تغيير الملف</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label text-white-50">عنوان الفيديو</label>
+                            <input type="text" class="form-control bg-black text-white border-secondary" name="title" id="title" placeholder="اكتب عنواناً جذاباً...">
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-4">
+                            <label for="description" class="form-label text-white-50">الوصف (هاشتاقات، تفاصيل)</label>
+                            <textarea class="form-control bg-black text-white border-secondary" name="description" id="description" rows="3" placeholder="#تيك_توك #ترند..."></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-danger btn-lg rounded-pill fw-bold py-3">
+                                <i class="fa-solid fa-paper-plane me-2"></i> نشر الفيديو
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function previewVideo(input) {
+    if (input.files && input.files[0]) {
+        document.getElementById('uploadPrompt').classList.add('d-none');
+        document.getElementById('videoPreview').classList.remove('d-none');
+        document.getElementById('fileName').textContent = input.files[0].name;
+    }
+}
+
+function resetUpload() {
+    document.getElementById('video').value = '';
+    document.getElementById('uploadPrompt').classList.remove('d-none');
+    document.getElementById('videoPreview').classList.add('d-none');
+}
+</script>
+{% endblock %}
