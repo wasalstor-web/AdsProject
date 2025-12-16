@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع إعلانات</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>سوق الإعلانات المفتوح</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">الرئيسية</a>
+            <a href="{{ url_for('add_ad') }}" class="btn">أضف إعلانك</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>آخر الإعلانات</h2>
+        <div class="ads-container">
+            {% for ad in ads %}
+            <div class="ad-card">
+                <h3>{{ ad.title }}</h3>
+                <p class="price">{{ ad.price }} ريال</p>
+                <p class="desc">{{ ad.description }}</p>
+                <p class="contact">للتواصل: {{ ad.contact }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
